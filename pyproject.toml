@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aegiscli"
+version = "0.1.0"
+description = "AegisCLI - Modular Recon Framework"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+
+authors = [
+    { name = "Martin Simonyan", email = "martinsimonyan2563@gmail.com" }
+]
+
+dependencies = [
+    "colorama>=0.4",
+    "whoisit>=4.0"
+]
+
+# Entry point: this creates the 'aegiscli' terminal command
+[project.scripts]
+aegiscli = "aegiscli.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "."}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["aegiscli*"]
