@@ -1,34 +1,55 @@
 import argparse
 import aegiscli.core.logger as logger
-
+import aegiscli.core.flagger as flagger
 
 def main():
     parser = argparse.ArgumentParser(
         prog="aegiscli",
         description="AegisCLI - modular recon framework"
     )
+
+    # global parser (shared flags)
     global_parser = argparse.ArgumentParser(add_help=False)
     global_parser.add_argument("--log", action="store_true")
+    global_parser.add_argument("-v", action="store_true")
+
+
+
+    # main categories
     subparsers = parser.add_subparsers(dest="command", required=True)
-    whois_parser = subparsers.add_parser("whois", parents=[global_parser])
-    whois_parser.add_argument("target")
+
+    # profiler category, inherits global flags
+    profiler_parser = subparsers.add_parser(
+        "profiler",
+        help="Profiler tool",
+        parents=[global_parser]
+    )
+
+    profiler_parser.add_argument("submodule", choices=["whois", "dns", "all"])
+    profiler_parser.add_argument("target")
 
     args = parser.parse_args()
-    if args.log:
+
+    if getattr(args, "log", False):
         logger.start_log()
 
+    if args.v:
+        flagger.verbose.enable()
+        
+
     try:
-        if args.command == "whois":
-            import aegiscli.tools.profiler.whois as whois
-            script = whois.Whois(settings=None, advanced=False, target=args.target)
-            script.domain_info()
+        if args.command == "profiler":
+            from aegiscli.tools.profiler.profiler import Profiler
+            initializator = Profiler(settings=None, submodule=args.submodule, mode=None, target=args.target)
+            initializator.selector()
 
     except Exception as e:
         logger.log(f"[ERROR]: {e}")
 
     finally:
-        if args.log:
+        if getattr(args, "log", False):
             logger.stop_log()
+
 
 
 if __name__ == "__main__":

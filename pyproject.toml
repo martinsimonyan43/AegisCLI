@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aegiscli"
-version = "0.1.0"
+version = "0.2.0"
 description = "AegisCLI - Modular Recon Framework"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -16,10 +16,10 @@ authors = [
 
 dependencies = [
     "colorama>=0.4",
-    "whoisit>=4.0"
+    "whoisit>=4.0",
+    "dnspython>=2.8"
 ]
 
-# Entry point: this creates the 'aegiscli' terminal command
 [project.scripts]
 aegiscli = "aegiscli.cli:main"
 
