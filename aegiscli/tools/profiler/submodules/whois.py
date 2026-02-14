@@ -2,10 +2,10 @@ import whoisit
 whoisit.bootstrap()
 from colorama import Fore, Style
 import subprocess
-from aegiscli.core.logger import log
+from aegiscli.core.utils.logger import log
 import aegiscli.tools.profiler.profiler as profiler
-from aegiscli.core.flagger import verbose
-
+from aegiscli.core.utils.flagger import verbose
+from aegiscli.core.helpers.formatter import s, parse_value, parse_cookie, flattener
 
 def whois_shell(domain):
     try:
@@ -70,8 +70,9 @@ class Whois(profiler.Profiler):
         # CASE 1: Raw WHOIS fallback
         if self.mode == "whois_raw":
             verbose.step("RDAP unavailable, using raw WHOIS output")
-            log(f"{Fore.CYAN}[NOTICE]{Style.RESET_ALL} This registry does not support RDAP.")
-            log(f"{Fore.MAGENTA} === WHOIS INFO === {Style.RESET_ALL}")
+            s.header("whois info")
+            log(f"{Fore.CYAN}[NOTICE]{Style.RESET_ALL} This registry does not support RDAP. This is all we could get")
+
             log(self.raw_whois)
             return
 
@@ -119,13 +120,13 @@ class Whois(profiler.Profiler):
     def _pretty(self, info):
         verbose.step("Printing WHOIS data")
 
-        log(f"{Fore.MAGENTA} === WHOIS INFO === {Style.RESET_ALL}")
+        s.header("whois info")
         tab = " " * 4
 
         for key, value in info.items():
 
             if isinstance(value, dict):
-                log(f"{Fore.BLUE}{key.capitalize()}: {Style.RESET_ALL}")
+                log(f"{Fore.CYAN}{key.capitalize()}: {Style.RESET_ALL}")
 
                 for k, v in value.items():
                     if isinstance(v, dict):
@@ -154,14 +155,14 @@ class Whois(profiler.Profiler):
             elif isinstance(value, (list, tuple, set)):
                 if len(value) == 1:
                     only = next(iter(value))
-                    log(f"{Fore.BLUE}{key.capitalize()}: {Style.RESET_ALL} {only}")
+                    log(f"{Fore.CYAN}{key.capitalize()}: {Style.RESET_ALL} {only}")
                 else:
-                    log(f"{Fore.BLUE}{key.capitalize()}: {Style.RESET_ALL}")
+                    log(f"{Fore.CYAN}{key.capitalize()}: {Style.RESET_ALL}")
                     for item in value:
                         log(f"{tab}{item}")
 
             else:
-                log(f"{Fore.BLUE}{key.capitalize()}: {Style.RESET_ALL} {value}")
+                log(f"{Fore.CYAN}{key.capitalize()}: {Style.RESET_ALL} {value}")
 
 
 

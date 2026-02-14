@@ -24,3 +24,12 @@ class Profiler:
                 target=self.target
             )
             script.result()
+        elif self.submodule == 'web':
+            import aegiscli.tools.profiler.submodules.web as web
+            script = web.WebFinger(
+                settings=self.settings,
+                submodule=self.submodule,
+                mode=self.mode,
+                target=self.target
+            )
+            script.result()

@@ -1,5 +1,5 @@
 from colorama import Fore, Style
-from aegiscli.core.logger import log
+from aegiscli.core.utils.logger import log
 
 class Verbose:
     def __init__(self):
@@ -27,10 +27,6 @@ class Verbose:
     def fail(self, text):
         if self.enabled:
             log(f"{self._indent()}[-] {text}")
-
-    def header(self, text):
-        if self.enabled:
-            log(f"{self._indent()}[{Fore.CYAN}*{Style.RESET_ALL}] === {text} ===")
 
     def space(self):
         if self.enabled:

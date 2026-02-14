@@ -1,6 +1,6 @@
 import argparse
-import aegiscli.core.logger as logger
-import aegiscli.core.flagger as flagger
+import aegiscli.core.utils.logger as logger
+import aegiscli.core.utils.flagger as flagger
 
 def main():
     parser = argparse.ArgumentParser(
@@ -25,7 +25,7 @@ def main():
         parents=[global_parser]
     )
 
-    profiler_parser.add_argument("submodule", choices=["whois", "dns", "all"])
+    profiler_parser.add_argument("submodule", choices=["whois", "dns", "web"])
     profiler_parser.add_argument("target")
 
     args = parser.parse_args()

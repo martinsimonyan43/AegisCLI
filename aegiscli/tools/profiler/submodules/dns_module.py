@@ -1,9 +1,10 @@
 import dns.resolver
 import dns.reversename
 import aegiscli.tools.profiler.profiler as profiler
-from aegiscli.core.logger import log
+from aegiscli.core.utils.logger import log
 from colorama import Style, Fore
-from aegiscli.core.flagger import verbose
+from aegiscli.core.utils.flagger import verbose
+from aegiscli.core.helpers.formatter import s, parse_value, parse_cookie, flattener
 
 class DNS(profiler.Profiler):
     def __init__(self, settings, submodule, mode, target):
@@ -73,9 +74,10 @@ class DNS(profiler.Profiler):
         verbose.step("Formatting DNS output...")
         raw = self.resolve_record()
 
-        log(f"{Fore.MAGENTA}=== DNS INFO ==={Style.RESET_ALL}")
+        s.header("Dns Info")
+        s.subheader("Dns Records")
         for record, value in raw.items():
-            log(f"{Fore.BLUE}{record} RECORDS:{Style.RESET_ALL}")
+            log(f"{Fore.CYAN}{record} RECORD:{Style.RESET_ALL}")
 
             if not value:
                 log(self.tab + "No Records")
@@ -89,7 +91,7 @@ class DNS(profiler.Profiler):
         verbose.step("Processing reverse DNS results...")
         rev = self.reverse_all(records=raw)
 
-        log(f"{Fore.BLUE}REVERSE DNS:{Style.RESET_ALL}")
+        s.subheader("Reverse DNS")
         for ip, ptrs in rev.items():
             if not ptrs:
                 log(f"{self.tab}{ip} → No PTR")
