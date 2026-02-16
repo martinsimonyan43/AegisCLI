@@ -1,16 +1,16 @@
 # ⚔️ AegisCLI — Modular Recon Framework
 
-AegisCLI is a lightweight, extensible command-line framework for security reconnaissance and OSINT tasks. It is designed with a strict architecture, isolated modules, and predictable output to serve as a reliable foundation for building modern recon workflows.
+AegisCLI is a lightweight recon framework designed to eliminate tool-juggling hell. Native implementations with consistent CLI patterns across profiling, scanning, enumeration, and analysis - built for chaining, automation, and maintainability.
 
 ---
 
-## 🚨 Current Version: **0.3.0 Alpha**
+## 🚨 Current Version: **0.3.1 Alpha**
 
 This release introduces the Web Fingerprinter submodule, centralized text formatting utilities, and improved project structure with better output consistency.
 
 ---
 
-## ✨ Features (v0.3.0 Alpha)
+## ✨ Features (v0.3.1 Alpha)
 
 ### Profiler Module
 
@@ -53,7 +53,7 @@ This release introduces the Web Fingerprinter submodule, centralized text format
 
 ---
 
-## 🚀 Usage Examples
+## 🚀 Quick Start
 
 ```bash
 # WHOIS / RDAP lookup with verbose mode
@@ -102,34 +102,30 @@ Design principles:
 
 ---
 
-## ⚠️ Known Issues
-
-* **WHOIS and DNS submodules** currently use legacy output formatting. These will be migrated to use the new `formatter.py` utilities in **v0.3.1** for consistent visualization across all Profiler submodules.
-* **Verbose** mode doesn't work for Web Fingerprinter. Currently changes are made to that flag to improve its usability for the whole framework.
-
----
-
 ## 📦 Roadmap
 
 ### Short-term
 
-* Migrate WHOIS and DNS to use formatter.py
 * Add security analysis flags for Web Fingerprinter (missing HSTS, insecure cookies, etc.)
 * Additional OSINT sources for Profiler
 
 ### Medium-term
 
 * Start Scanner module (ports, services, banners)
-* Enumerator module with optional ffuf/gobuster adapters
-* Analyser module (hash, file, URL intelligence)
-* Injector module (SQLi testing, payload logic)
+* Enumerator module with optional ffuf adapters
+* Analyser module (Using external APIs for reconnisance)
+* JSON configuration engine
+* Tool Chaining
+
 
 ### Long-term
 
 * Plugin ecosystem
-* JSON configuration engine
 * Output profiles (Minimal / JSON / Extended)
 * Unified workflow chaining and refinement
+* Injector module (SQLi testing, payload logic)
+* Log Analyser
+
 
 ---
 
@@ -137,7 +133,7 @@ Design principles:
 
 Full history available in `CHANGELOG.md`.
 
-Latest changes in **0.3.0 Alpha**:
+Latest changes in **0.3.1 Alpha**:
 
 * Added Web Fingerprinter submodule to Profiler
 * Added centralized text formatting via `core/helpers/formatter.py`

@@ -5,7 +5,14 @@ The format is based on [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [0.3.0] - 2026-02-15
+## [0.3.1a0] - 2026-02-17
+
+### Changed
+
+- Verbose mode now is much more usefull and consistent across all the tool (Change was made faster than initially planned)
+- DNS and WHOIS submodules of the Profiler module are now showing consistent output with Web Fingerprinter submodule
+
+## [0.3.0a0] - 2026-02-15
 ### Added
 - New Profiler submodule: **Web Fingerprinter**
   - Connection analysis (status code, timing, HTTP version, redirect chains)
@@ -26,7 +33,7 @@ The format is based on [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [0.2.0] - 2026-02-05
+## [0.2.0a0] - 2026-02-05
 ### Added
 - New Profiler submodule was added - DNS Resolver.
 - Reverse DNS lookup integration.
@@ -42,7 +49,7 @@ The format is based on [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [0.1.0] - 2026-01-29
+## [0.1.0a0] - 2026-01-29
 ### Added
 - Initial project structure.
 - WHOIS submodule for **Profiler** module.
